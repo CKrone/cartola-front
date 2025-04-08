@@ -98,7 +98,7 @@ const modalVisible = ref(false)
 const roundPointsList = ref([])
 
 const openModal = () => {
-    roundPointsList.value = players.value.map(player => player.lastRoundPoints || null)
+    roundPointsList.value = players.value.map(player => 0)
     modalVisible.value = true
 }
 
@@ -149,7 +149,7 @@ onMounted(async () => {
             wins: player.wins || 0
         }))
     } catch (error) {
-        alert('Erro ao carregar os dados do Supabase')
+        alert('Erro ao carregar os dados dos jogadores.')
     }
 })
 
