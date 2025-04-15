@@ -12,6 +12,8 @@ const players = ref([
     { id: 6, name: 'Valdir', wins: 0, lastRoundPoints: 0, totalPoints: 0, valuePerRound: 0, valueTotal: 0 }
 ])
 
+let loading = ref(false)
+
 const codeInput = ref('')
 const isCodeValid = ref(false)
 const checkCodeValidity = async () => {
@@ -51,7 +53,7 @@ const headers = [
     { title: 'Última Rodada', key: 'lastRoundPoints' },
     { title: 'Pontuação Total', key: 'totalPoints' },
     { title: 'Valor Ganho Por Rodada', key: 'valuePerRound' },
-    { title: 'Total Premiação', key: 'valueTotal' },
+    { title: 'Total Premiação', key: 'valueTotal' }
 ]
 
 const formatCurrency = (value) => {
@@ -133,6 +135,7 @@ const savePlayerData = async (players) => {
 }
 
 onMounted(async () => {
+    loading.value = true
     try {
         const { data, error } = await supabase
             .from('cartola_2025')
@@ -151,6 +154,7 @@ onMounted(async () => {
     } catch (error) {
         alert('Erro ao carregar os dados dos jogadores.')
     }
+    loading.value = false
 })
 
 </script>
@@ -159,6 +163,7 @@ onMounted(async () => {
     <v-container>
         <h2 class="text-center mb-4">Ranking dos Jogadores</h2>
         <v-data-table
+            :loading="loading"
             :headers="headers"
             :items="sortedPlayers"
             density="compact"
