@@ -73,9 +73,9 @@ const updateAllPlayersStats = (roundPointsList) => {
         player.totalPoints += points[index]
     })
 
-    const maxPoints = Math.max(...players.value.map(player => player.totalPoints))
-    players.value.forEach(player => {
-        if (player.totalPoints === maxPoints) {
+    const maxRoundPoints = Math.max(...points)
+    players.value.forEach((player, index) => {
+        if (points[index] === maxRoundPoints) {
             player.wins += 1
             player.valuePerRound += 5
         }
@@ -176,6 +176,12 @@ onMounted(async () => {
             </template>
             <template v-slot:item.valueTotal="{ item }">
                 <span>{{ formatCurrency(item.valueTotal) }}</span>
+            </template>
+            <template v-slot:item.totalPoints="{ item }">
+                {{ item.totalPoints.toFixed(2) }}
+            </template>
+            <template v-slot:item.lastRoundPoints="{ item }">
+                {{ item.lastRoundPoints.toFixed(2) }}
             </template>
         </v-data-table>
         <v-text-field
