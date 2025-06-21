@@ -6,30 +6,7 @@ Front hospedado no Netlify e o banco na Supabase.
 
 # cartola-front
 
-This template should help get you started developing with Vue 3 in Vite.
+Exibe as pontuações dos competidores e os valores por rodada e valor final.
 
-## Recommended IDE Setup
+![image](https://github.com/user-attachments/assets/4c23bd08-3ab4-4194-ae23-93d29bbed54f)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
