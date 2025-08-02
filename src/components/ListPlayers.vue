@@ -52,13 +52,18 @@ const sortedPlayers = computed(() => {
 const headers = [
     { title: 'Posição', key: 'position' },
     { title: 'Nome', key: 'name' },
-    { title: 'Vitórias', key: 'wins' },
-    { title: 'Última Rodada', key: 'lastRoundPoints' },
-    { title: 'Pontuação Total', key: 'totalPoints' },
-    { title: 'Pontos Até o Próximo ', key: 'pointsToNext' },
-    { title: 'Pontos Até o Líder', key: 'pointsToLeader' },
-    { title: 'Valor Ganho Por Rodada', key: 'valuePerRound' },
-    { title: 'Total Premiação', key: 'valueTotal' }
+    { title: 'Última Rodada', key: 'lastRoundPoints', align: 'center' },
+    { title: 'Pontuação Total', key: 'totalPoints', align: 'center' },
+    { title: 'Pontos Até o Próximo ', key: 'pointsToNext', align: 'center' },
+    { title: 'Pontos Até o Líder', key: 'pointsToLeader', align: 'center' },
+]
+
+const headersValores = [
+    { title: 'Posição', key: 'position' },
+    { title: 'Nome', key: 'name' },
+    { title: 'Vitórias', key: 'wins', align: 'center' },
+    { title: 'Valor Ganho Por Rodada', key: 'valuePerRound', align: 'center' },
+    { title: 'Total Premiação', key: 'valueTotal', align: 'center' }
 ]
 
 const formatCurrency = (value) => {
@@ -199,12 +204,6 @@ onMounted(async () => {
             :items-per-page-options="[10,15,25]"
             :hide-default-footer="true"
         >
-            <template v-slot:item.valuePerRound="{ item }">
-                <span>{{ formatCurrency(item.valuePerRound) }}</span>
-            </template>
-            <template v-slot:item.valueTotal="{ item }">
-                <span>{{ formatCurrency(item.valueTotal) }}</span>
-            </template>
             <template v-slot:item.pointsToNext="{ item }">
                 {{ item.pointsToNext.toFixed(2) }}
             </template>
@@ -216,6 +215,23 @@ onMounted(async () => {
             </template>
             <template v-slot:item.lastRoundPoints="{ item }">
                 {{ item.lastRoundPoints.toFixed(2) }}
+            </template>
+        </v-data-table>
+        <v-data-table
+            style="margin-top: 20px"
+            :loading="loading"
+            :headers="headersValores"
+            :items="sortedPlayers"
+            density="compact"
+            class="elevation-2"
+            :items-per-page-options="[10,15,25]"
+            :hide-default-footer="true"
+        >
+            <template v-slot:item.valuePerRound="{ item }">
+                <span>{{ formatCurrency(item.valuePerRound) }}</span>
+            </template>
+            <template v-slot:item.valueTotal="{ item }">
+                <span>{{ formatCurrency(item.valueTotal) }}</span>
             </template>
         </v-data-table>
         <v-text-field
