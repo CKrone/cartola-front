@@ -150,7 +150,9 @@ const savePlayerData = async (players) => {
             totalPoints: player.totalPoints,
             valuePerRound: player.valuePerRound,
             valueTotal: player.valueTotal,
-            wins: player.wins
+            wins: player.wins,
+            pointsToLeader: player.pointsToLeader,
+            pointsToNext: player.pointsToNext
         }))
 
         const { error } = await supabase
