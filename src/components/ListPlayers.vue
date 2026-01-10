@@ -16,9 +16,11 @@ let loading = ref(false)
 
 const codeInput = ref('')
 const isCodeValid = ref(false)
-const BONIFICACAO_PRIMEIRO_COLOCADO = 200
-const BONIFICACAO_SEGUNDO_COLOCADO = 130
-const BONIFICACAO_TERCEIRO_COLOCADO = 80
+const TABLE_CARTOLA_DATA = 'cartola_2026'
+const BONIFICACAO_PRIMEIRO_COLOCADO = 150
+const BONIFICACAO_SEGUNDO_COLOCADO = 100
+const BONIFICACAO_TERCEIRO_COLOCADO = 84
+const VALOR_POR_RODADA = 7
 const checkCodeValidity = async () => {
     const inputHash = CryptoJS.SHA256(codeInput.value).toString(CryptoJS.enc.Hex)
 
@@ -87,7 +89,7 @@ const updateAllPlayersStats = (roundPointsList) => {
     players.value.forEach((player, index) => {
         if (points[index] === maxRoundPoints) {
             player.wins += 1
-            player.valuePerRound += 5
+            player.valuePerRound += VALOR_POR_RODADA
         }
     })
 
@@ -156,7 +158,7 @@ const savePlayerData = async (players) => {
         }))
 
         const { error } = await supabase
-            .from('cartola_2025')
+            .from(TABLE_CARTOLA_DATA)
             .upsert(dataToSave, { onConflict: ['id'] })
 
         if (error) throw error
@@ -171,7 +173,7 @@ onMounted(async () => {
     loading.value = true
     try {
         const { data, error } = await supabase
-            .from('cartola_2025')
+            .from(TABLE_CARTOLA_DATA)
             .select('*')
 
         if (error) throw error
