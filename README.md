@@ -1,6 +1,6 @@
 # Sobre
 
-Projeto criado para controlar a competição do jogo Cartola de 2025.
+Projeto criado para controlar a competição do jogo Cartola. Iniciei o projeto em 2025 e continuo atualizando conforme a competição aconteça.
 Projeto simples, com validação de hash para habilitar botão e adicionar a pontuação.
 Front hospedado no Netlify e o banco na Supabase.
 
